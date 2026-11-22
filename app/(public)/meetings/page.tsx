@@ -1,3 +1,5 @@
+
+import Link from 'next/link';
 import { Suspense } from 'react';
 import MeetingCard from '@/components/MeetingCard';
 import MeetingSearch from '@/components/MeetingSearch';
@@ -29,18 +31,27 @@ export default async function MeetingsPage({
   return (
     <main className="flex-1 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="mb-10">
-          <p className="text-sm font-bold uppercase tracking-widest text-blue-700">
-            Lagos Mainland Ward
-          </p>
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-blue-700">
+              Lagos Mainland Ward
+            </p>
 
-          <h1 className="mt-2 text-3xl font-bold text-blue-900">
-            All Sacrament Meetings
-          </h1>
+            <h1 className="mt-2 text-3xl font-bold text-blue-900">
+              All Sacrament Meetings
+            </h1>
 
-          <p className="mt-3 text-slate-600">
-            Browse meeting programs and view their complete details.
-          </p>
+            <p className="mt-3 text-slate-600">
+              Browse meeting programs and view their complete details.
+            </p>
+          </div>
+
+          <Link
+            href="/meetings/new"
+            className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            + Create New Meeting
+          </Link>
         </div>
 
         <Suspense fallback={<div className="mb-8 h-12" />}>

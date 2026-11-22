@@ -2,6 +2,8 @@
 import { redirect } from 'next/navigation';
 import { getMeetings } from '@/lib/meetings-db';
 
+export const instant = false;
+
 export default async function CurrentMeetingPage() {
   const result = await getMeetings();
   const meetings = result.meetings;
