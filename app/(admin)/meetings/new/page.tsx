@@ -1,5 +1,8 @@
+
 import MeetingForm from '@/components/MeetingForm';
 import { createMeeting } from '@/lib/actions';
+
+export const instant = false;
 
 export default function NewMeetingPage() {
   return (

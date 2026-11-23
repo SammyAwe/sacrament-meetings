@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
@@ -11,8 +12,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Sacrament Meeting Planner',
-  description: 'Plan and organize sacrament meetings for Lagos Mainland Ward.',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  ),
+  title: {
+    default: 'Sacrament Meeting Planner',
+    template: '%s | Sacrament Meeting Planner',
+  },
+  description:
+    'Plan and organize sacrament meetings for Lagos Mainland Ward.',
+  openGraph: {
+    title: 'Sacrament Meeting Planner',
+    description:
+      'Plan and organize sacrament meetings for Lagos Mainland Ward.',
+    type: 'website',
+    siteName: 'Sacrament Meeting Planner',
+  },
 };
 
 export default function RootLayout({

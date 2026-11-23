@@ -1,6 +1,7 @@
 
 'use server';
 
+import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -60,6 +61,14 @@ export type State = {
   errors?: Record<string, string[] | undefined>;
 };
 
+async function requireBishopric() {
+  const session = await auth();
+
+  if (!session?.user || session.user.role !== 'bishopric') {
+    redirect('/login');
+  }
+}
+
 function toMeeting(data: z.infer<typeof MeetingFormSchema>) {
   const speakers = data.speakers
     .split('\n')
@@ -112,6 +121,8 @@ export async function createMeeting(
   _prevState: State,
   formData: FormData
 ): Promise<State> {
+  await requireBishopric();
+
   const parsed = MeetingFormSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -139,6 +150,8 @@ export async function updateMeeting(
   _prevState: State,
   formData: FormData
 ): Promise<State> {
+  await requireBishopric();
+
   const parsed = MeetingFormSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -163,6 +176,8 @@ export async function updateMeeting(
 }
 
 export async function deleteMeeting(id: number) {
+  await requireBishopric();
+
   try {
     await removeMeeting(id);
   } catch (error) {

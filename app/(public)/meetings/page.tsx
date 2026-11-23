@@ -1,10 +1,17 @@
 
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MeetingCard from '@/components/MeetingCard';
 import MeetingSearch from '@/components/MeetingSearch';
 import Pagination from '@/components/Pagination';
 import { getMeetings } from '@/lib/meetings-db';
+
+export const metadata: Metadata = {
+  title: 'All Sacrament Meetings',
+  description:
+    'Browse sacrament meeting programs, announcements, hymns, speakers, and meeting details for Lagos Mainland Ward.',
+};
 
 interface MeetingsPageProps {
   searchParams: Promise<{
